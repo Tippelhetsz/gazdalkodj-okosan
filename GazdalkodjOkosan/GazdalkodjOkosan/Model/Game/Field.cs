@@ -14,7 +14,7 @@ namespace GazdalkodjOkosan.Model.Game
         }
         public IAction Action
         {
-            get;
+            get { return action; }
         }
 
         private int FieldID;
