@@ -3,7 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GazdalkodjOkosan", "GazdalkodjOkosan\GazdalkodjOkosan.csproj", "{1A647D60-D543-4312-B87C-55F93C910BC5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gazdalkodj_Okosan", "Gazdalkodj_Okosan\Gazdalkodj_Okosan.csproj", "{FAB6ECCF-E2AB-4FC9-94EA-3368330BBC19}"
+EndProject
 Global
+	GlobalSection(SubversionScc) = preSolution
+		Svn-Managed = True
+		Manager = AnkhSVN - Subversion Support for Visual Studio
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
 		Release|x86 = Release|x86
@@ -13,6 +19,10 @@ Global
 		{1A647D60-D543-4312-B87C-55F93C910BC5}.Debug|x86.Build.0 = Debug|x86
 		{1A647D60-D543-4312-B87C-55F93C910BC5}.Release|x86.ActiveCfg = Release|x86
 		{1A647D60-D543-4312-B87C-55F93C910BC5}.Release|x86.Build.0 = Release|x86
+		{FAB6ECCF-E2AB-4FC9-94EA-3368330BBC19}.Debug|x86.ActiveCfg = Debug|x86
+		{FAB6ECCF-E2AB-4FC9-94EA-3368330BBC19}.Debug|x86.Build.0 = Debug|x86
+		{FAB6ECCF-E2AB-4FC9-94EA-3368330BBC19}.Release|x86.ActiveCfg = Release|x86
+		{FAB6ECCF-E2AB-4FC9-94EA-3368330BBC19}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
