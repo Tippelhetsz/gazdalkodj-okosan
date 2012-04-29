@@ -63,12 +63,48 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Control\ClientController.cs" />
+    <Compile Include="Control\GameEngine.cs" />
+    <Compile Include="Control\IController.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Model\Actions\Ban.cs" />
+    <Compile Include="Model\Actions\BookShop.cs" />
+    <Compile Include="Model\Actions\BuyBook.cs" />
+    <Compile Include="Model\Actions\BuyFurniture.cs" />
+    <Compile Include="Model\Actions\BuyHouse.cs" />
+    <Compile Include="Model\Actions\BuyInsurance.cs" />
+    <Compile Include="Model\Actions\BuySavingBook.cs" />
+    <Compile Include="Model\Actions\DrawLuckyCard.cs" />
+    <Compile Include="Model\Actions\Fee.cs" />
+    <Compile Include="Model\Actions\Fine.cs" />
+    <Compile Include="Model\Actions\FurnitureShop.cs" />
+    <Compile Include="Model\Actions\Go.cs" />
+    <Compile Include="Model\Actions\GoTo.cs" />
+    <Compile Include="Model\Actions\HouseFire.cs" />
+    <Compile Include="Model\Actions\HouseShop.cs" />
+    <Compile Include="Model\Actions\IAction.cs" />
+    <Compile Include="Model\Actions\InsuranceShop.cs" />
+    <Compile Include="Model\Actions\Nothing.cs" />
+    <Compile Include="Model\Actions\PlusRolls.cs" />
+    <Compile Include="Model\Actions\SavingBookInterest.cs" />
+    <Compile Include="Model\Actions\StartField.cs" />
+    <Compile Include="Model\Actions\WinFurniture.cs" />
+    <Compile Include="Model\Game\Dice.cs" />
+    <Compile Include="Model\Game\EInsurance.cs" />
+    <Compile Include="Model\Game\Field.cs" />
+    <Compile Include="Model\Game\House.cs" />
+    <Compile Include="Model\Game\LuckyCard.cs" />
+    <Compile Include="Model\Game\PieceOfFurniture.cs" />
+    <Compile Include="Model\Game\Player.cs" />
+    <Compile Include="Model\Game\Table.cs" />
+    <Compile Include="Model\Network\GameClient.cs" />
+    <Compile Include="Model\Network\GameData.cs" />
+    <Compile Include="Model\Network\GameServer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
