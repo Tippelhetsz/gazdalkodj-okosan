@@ -6,8 +6,6 @@
         <Grid.Background>
             <ImageBrush ImageSource="/Gazdalkodj_Okosan;component/img/main.png" />
         </Grid.Background>
-        <Button Content="Játék indítása" Height="23" HorizontalAlignment="Left" Margin="27,22,0,0" Name="button1" VerticalAlignment="Top" Width="88" Click="button1_Click" />
-        <Button Content="Csatlakozás egy játékhoz" Height="23" HorizontalAlignment="Right" Margin="0,22,62,0" Name="button2" VerticalAlignment="Top" Width="142" Click="button2_Click" />
         <Grid Name="MainButtonGrid" Visibility="Visible">
             <Grid Margin="314,268,0,0">
                 <Ellipse Height="100" HorizontalAlignment="Left"  Name="NewGameEllipse" Stroke="#FFAF0000" VerticalAlignment="Top" Width="335" Fill="#FFD70000" Cursor="Hand" MouseDown="NewGameEllipse_MouseDown" />
@@ -23,29 +21,29 @@
             </Grid>
         </Grid>
         <Grid Name="ConnectionGrid" Visibility="Hidden">
-            <Grid Name="ConnectGrid1">
-                <Rectangle Height="99" HorizontalAlignment="Left" Margin="93,298,0,0" Name="P1Rect" Stroke="Black" VerticalAlignment="Top" Width="206" Fill="Cornsilk" />
-                <TextBlock Name="P1StatusText"/>
+            <Grid Name="ConnectGrid1" Margin="93,298,0,0">
+                <Rectangle Height="99" HorizontalAlignment="Left"  Name="P1Rect" Stroke="Black" VerticalAlignment="Top" Width="206" Fill="Cornsilk" />
+                <TextBlock Name="P1StatusText" FontSize="14" Foreground="Red" FontFamily="ChessmasterX" Margin="15,10,0,0" TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Top"/>
             </Grid>
-            <Grid Name="ConnectGrid2">
-                <Rectangle Fill="Cornsilk" Height="99" HorizontalAlignment="Left" Margin="93,429,0,0" Name="P2Rect" Stroke="Black" VerticalAlignment="Top" Width="206" />
-                <TextBlock Name="P2StatusText"/>
+            <Grid Name="ConnectGrid2" Margin="93,429,0,0">
+                <Rectangle Fill="Cornsilk" Height="99" HorizontalAlignment="Left"  Name="P2Rect" Stroke="Black" VerticalAlignment="Top" Width="206" />
+                <TextBlock Name="P2StatusText" FontSize="14" Foreground="Orange" FontFamily="ChessmasterX" Margin="15,10,0,0" TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Top"/>
             </Grid>
-            <Grid Name="ConnectGrid3">
-                 <Rectangle Fill="Cornsilk" Height="99" HorizontalAlignment="Left" Margin="93,560,0,0" Name="P3Rect" Stroke="Black" VerticalAlignment="Top" Width="206" />
-                <TextBlock Name="P3StatusText"/>
+            <Grid Name="ConnectGrid3" Margin="93,560,0,0">
+                 <Rectangle Fill="Cornsilk" Height="99" HorizontalAlignment="Left"  Name="P3Rect" Stroke="Black" VerticalAlignment="Top" Width="206" />
+                <TextBlock Name="P3StatusText"  FontSize="14" Foreground="Yellow" FontFamily="ChessmasterX" Margin="15,10,0,0" TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Top"/>
             </Grid>
-            <Grid Name="ConnectGrid4">
-                <Rectangle Fill="Cornsilk" Height="99" HorizontalAlignment="Left" Margin="700,298,0,0" Name="P4Rect" Stroke="Black" VerticalAlignment="Top" Width="206" />
-                <TextBlock Name="P4StatusText"/>
+            <Grid Name="ConnectGrid4" Margin="700,298,0,0">
+                <Rectangle Fill="Cornsilk" Height="99" HorizontalAlignment="Left"  Name="P4Rect" Stroke="Black" VerticalAlignment="Top" Width="206" />
+                <TextBlock Name="P4StatusText" FontSize="14" Foreground="Green" FontFamily="ChessmasterX" Margin="15,10,0,0" TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Top"/>
             </Grid>
-            <Grid Name="ConnectGrid5">
-                <Rectangle Fill="Cornsilk" Height="99" HorizontalAlignment="Left" Margin="700,429,0,0" Name="P5Rect" Stroke="Black" VerticalAlignment="Top" Width="206" />
-                <TextBlock Name="P5StatusText"/>
+            <Grid Name="ConnectGrid5" Margin="700,429,0,0">
+                <Rectangle Fill="Cornsilk" Height="99" HorizontalAlignment="Left" Name="P5Rect" Stroke="Black" VerticalAlignment="Top" Width="206" />
+                <TextBlock Name="P5StatusText" FontSize="14" Foreground="Blue" FontFamily="ChessmasterX" Margin="15,10,0,0" TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Top"/>
             </Grid>
-            <Grid Name="ConnectGrid6">
-                <Rectangle Fill="Cornsilk" Height="99" HorizontalAlignment="Left" Margin="700,560,0,0" Name="P6Rect" Stroke="Black" VerticalAlignment="Top" Width="206" />
-                <TextBlock Name="P6StatusText"/>
+            <Grid Name="ConnectGrid6" Margin="700,560,0,0">
+                <Rectangle Fill="Cornsilk" Height="99" HorizontalAlignment="Left"  Name="P6Rect" Stroke="Black" VerticalAlignment="Top" Width="206" />
+                <TextBlock Name="P6StatusText" FontSize="14" Foreground="Violet" FontFamily="ChessmasterX" Margin="15,10,0,0" TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Top"/>
             </Grid>
         </Grid>
     </Grid>
