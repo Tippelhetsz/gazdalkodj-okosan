@@ -5,11 +5,14 @@ using System.Text;
 
 namespace GazdalkodjOkosan.Model.Game
 {
-    class Player
+    public class Player
     {
-        private int UserID;
-        //private System.Drawing.Color color;
-        private int Money;
+        public Player(string name) {
+            UserName = name;
+        }
+
+        private string UserName;
+        public int Money { get; set; }
         public int SavingsBook;
         public int BookToken;
         public int BanForRounds;

@@ -7,22 +7,36 @@ namespace GazdalkodjOkosan.Model.Actions
 {
     class Fine : IAction
     {
+        public Fine(int amount, string message, Cond cond = null) {
+            this.amount = amount;
+            this.message = message;
+            this.cond = cond;
+        }
+
+        #region interface
         public string Message
         {
-            get { throw new NotImplementedException(); }
+            get { return message + " Fizess " + amount + ".- Ft büntetést!"; }
         }
 
         public bool Cond(Control.IController engine)
         {
-            throw new NotImplementedException();
+            if (cond != null) return cond.Invoke(engine);
+            return true;
         }
 
-        public void Do(Control.IController engine)
+        public IAction Do(Control.IController engine)
         {
-            throw new NotImplementedException();
+            if (Cond(engine))
+                engine.CurrentPlayer.Money -= amount;
+
+            return new Nothing();
         }
+        #endregion
 
         //
         private int amount;
+        private string message;
+        private Cond cond;
     }
 }

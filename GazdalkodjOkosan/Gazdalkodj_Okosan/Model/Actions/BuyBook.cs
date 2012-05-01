@@ -5,7 +5,7 @@ using System.Text;
 
 namespace GazdalkodjOkosan.Model.Actions
 {
-    class BuyBook : IAction
+    class BuyBook
     {
         public string Message
         {

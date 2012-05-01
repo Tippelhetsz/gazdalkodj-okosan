@@ -5,7 +5,7 @@ using System.Text;
 
 namespace GazdalkodjOkosan.Model.Actions
 {
-    class PlusRolls : IAction
+    class PlusRolls
     {
         public string Message
         {

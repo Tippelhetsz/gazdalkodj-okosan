@@ -6,7 +6,7 @@ using GazdalkodjOkosan.Model.Game;
 
 namespace GazdalkodjOkosan.Model.Actions
 {
-    class BuyHouse : IAction
+    class BuyHouse
     {
         public string Message
         {
