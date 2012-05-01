@@ -12,7 +12,7 @@ namespace GazdalkodjOkosan.Control
         #region Implement interface
         public int Roll()
         {
-            throw new NotImplementedException();
+            return dice.Roll();
         }
 
         public IAction Step(int fields)
@@ -29,6 +29,10 @@ namespace GazdalkodjOkosan.Control
         {
             throw new NotImplementedException();
         }
+
+        public Table Table { get { return table; } }
+
+        public Player CurrentPlayer { get { return players[currentPlayer]; } }
         #endregion
 
         public Player Winner()
@@ -36,13 +40,14 @@ namespace GazdalkodjOkosan.Control
             return null;
         }
 
-        public void CreateGame(int players) {
-            this.players = new Player[players];
-            table = new Table();
-            dice = new Dice();
+        public void CreateGame(Player[] players) {
+            this.players = players;
+            this.table = new Table();
+            this.dice = new Dice();
         }
 
         private Player[] players;
+        private int currentPlayer;
         private Table table;
         private Dice dice;
     }

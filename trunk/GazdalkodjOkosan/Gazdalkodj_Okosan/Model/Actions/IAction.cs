@@ -8,8 +8,15 @@ namespace GazdalkodjOkosan.Model.Actions
 {
     interface IAction
     {
-        string Message { get;}
+        string Message { get; }
         bool Cond(IController engine);
-        void Do(IController engine);
+        IAction Do(IController engine);
+    }
+
+    delegate bool Cond(IController engine);
+    delegate void Do(IController engine);
+
+    class NothingToDoException : Exception {
+        public NothingToDoException() : base("This is a Nothing action. You have to call NextPlayer function!") {}
     }
 }

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace GazdalkodjOkosan.Model.Actions
 {
-    class Go : IAction
+    class Go
     {
         public string Message
         {

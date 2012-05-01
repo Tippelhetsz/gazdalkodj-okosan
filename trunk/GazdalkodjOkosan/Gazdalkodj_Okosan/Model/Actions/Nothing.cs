@@ -17,6 +17,8 @@ namespace GazdalkodjOkosan.Model.Actions
             return true;
         }
 
-        public void Do(Control.IController engine) {}
+        public IAction Do(Control.IController engine) {
+            throw new NothingToDoException();
+        }
     }
 }

@@ -7,23 +7,41 @@ namespace GazdalkodjOkosan.Model.Actions
 {
     class StartField : IAction
     {
+        const int enterFee = 6000;
+        const int moveThroughFee = 4000;
+
+        public StartField(bool enter) {
+            this.enter = enter;
+            if (this.enter)
+            {
+                fee = new Fee(enterFee);
+                fee.Message = "Beléptél a START mezőre.";
+            }
+            else {
+                fee = new Fee(moveThroughFee);
+                fee.Message = "Áthaladtál a START mezőn.";
+            }
+        }
 
         public string Message
         {
-            get { throw new NotImplementedException(); }
+            get {
+                return fee.Message;
+            }
         }
 
         public bool Cond(Control.IController engine)
         {
-            throw new NotImplementedException();
+            return fee.Cond(engine);
         }
 
-        public void Do(Control.IController engine)
+        public IAction Do(Control.IController engine)
         {
-            throw new NotImplementedException();
+            return fee.Do(engine);
         }
 
         //
         private bool enter;
+        private Fee fee;
     }
 }

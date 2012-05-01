@@ -36,6 +36,16 @@ namespace GazdalkodjOkosan.Control
         {
             throw new NotImplementedException();
         }
+
+        public Model.Game.Player CurrentPlayer
+        {
+            get { throw new NotImplementedException(); }
+        }
+
+        public Model.Game.Table Table
+        {
+            get { throw new NotImplementedException(); }
+        }
         #endregion
 
         private GameServer server;

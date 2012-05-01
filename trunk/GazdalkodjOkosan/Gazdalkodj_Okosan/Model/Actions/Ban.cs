@@ -5,7 +5,7 @@ using System.Text;
 
 namespace GazdalkodjOkosan.Model.Actions
 {
-    class Ban : IAction
+    class Ban
     {
         public string Message
         {
@@ -25,5 +25,16 @@ namespace GazdalkodjOkosan.Model.Actions
         //
         private int[] untilRoll;
         private int rounds;
+
+
+        //Cond Cond
+        //{
+        //    get { throw new NotImplementedException(); }
+        //}
+
+        //Do Do
+        //{
+        //    get { throw new NotImplementedException(); }
+        //}
     }
 }

@@ -7,22 +7,39 @@ namespace GazdalkodjOkosan.Model.Actions
 {
     class Fee : IAction
     {
+        public Fee(int amount) {
+            this.amount = amount;
+        }
+
+        #region interface
         public string Message
         {
-            get { throw new NotImplementedException(); }
+            get { return message; }
+            set { message = value + "Kapsz " + amount + ".- Ft-ot!"; }
         }
 
         public bool Cond(Control.IController engine)
         {
-            throw new NotImplementedException();
+            if (_cond != null) return _cond.Invoke(engine);
+            return true;
         }
 
-        public void Do(Control.IController engine)
+        public IAction Do(Control.IController engine)
         {
-            throw new NotImplementedException();
-        }
+            if (Cond(engine))
+            {
+                engine.CurrentPlayer.Money += amount;
+            }
 
-        //
+            return new Nothing();
+        }
+        #endregion
+
+        // Data
         private int amount;
+        private string message;
+
+        Cond _cond;
+        Do _do;
     }
 }
