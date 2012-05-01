@@ -26,8 +26,15 @@ namespace Gazdalkodj_Okosan
     public partial class MainWindow : Window
     {
 
-        //ClientController Controller;
+        ClientController Controller;
        // private delegate void ProcessMessageSendDelegate(MessageCode code);
+        private String _PlayerName;
+
+        public String PlayerName
+        {
+            get { return _PlayerName; }
+            set { _PlayerName = value; }
+        }
 
         public MainWindow()
         {
@@ -56,8 +63,12 @@ namespace Gazdalkodj_Okosan
             //Controller.BeginConnect(IPAddress.Parse("192.168.56.1"), "Startjátékos");
             //Thread.Sleep(1000);
             //Controller.NewGame();
-            ConnectionGrid.Visibility = System.Windows.Visibility.Visible;
             MainButtonGrid.Visibility = System.Windows.Visibility.Hidden;
+            NameInputDialog dialog = new NameInputDialog(this);
+            dialog.ShowDialog();
+            ConnectionGrid.Visibility = System.Windows.Visibility.Visible;
+            UpdateConnectionInfo();
+
         }
 
         private void NewGameEllipse_MouseDown(object sender, MouseButtonEventArgs e)
@@ -85,6 +96,16 @@ namespace Gazdalkodj_Okosan
         private void QuitGameText_MouseDown(object sender, MouseButtonEventArgs e)
         {
             this.Close();
+        }
+
+        private void UpdateConnectionInfo()
+        {
+            for (int i = 0; i < ConnectionGrid.Children.Count; ++i)
+            {
+                ((Grid)ConnectionGrid.Children[i]).Visibility = Visibility.Hidden;
+            }
+            ((Grid)ConnectionGrid.Children[0]).Visibility = Visibility.Visible;
+            P1StatusText.Inlines.Add(new Run("1. játékos: " + PlayerName));
         }
     }
 }
