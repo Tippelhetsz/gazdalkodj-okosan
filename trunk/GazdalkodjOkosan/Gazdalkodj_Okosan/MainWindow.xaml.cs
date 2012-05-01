@@ -49,5 +49,42 @@ namespace Gazdalkodj_Okosan
             //Thread.Sleep(1000);
             //Controller.ConnectToGame();
         }
+
+        private void NewGameText_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            //Controller.StartServer();
+            //Controller.BeginConnect(IPAddress.Parse("192.168.56.1"), "Startjátékos");
+            //Thread.Sleep(1000);
+            //Controller.NewGame();
+            ConnectionGrid.Visibility = System.Windows.Visibility.Visible;
+            MainButtonGrid.Visibility = System.Windows.Visibility.Hidden;
+        }
+
+        private void NewGameEllipse_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            this.NewGameText_MouseDown(sender, e);
+        }
+
+        private void ConnectToText_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            //Controller.BeginConnect(IPAddress.Parse("192.168.56.1"), "Szandi");
+            //Thread.Sleep(1000);
+            //Controller.ConnectToGame();
+        }
+
+        private void ConnectToEllipse_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            this.ConnectToText_MouseDown(sender, e);
+        }
+
+        private void QuitEllipse_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            this.QuitGameText_MouseDown(sender, e);
+        }
+
+        private void QuitGameText_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            this.Close();
+        }
     }
 }
