@@ -5,24 +5,32 @@ using System.Text;
 
 namespace GazdalkodjOkosan.Model.Actions
 {
-    class Go
+    class Go : IAction
     {
+        string[] numbers { get { return new string[] { "", "egy", "két", "három" }; } }
+
+        public Go(int fields, string message = "")
+        {
+            this.fields = fields;
+            this.message = message;
+        }
         public string Message
         {
-            get { throw new NotImplementedException(); }
+            get { return message + "Lépj előre " + numbers[fields] + "mezőt!"; }
         }
 
         public bool Cond(Control.IController engine)
         {
-            throw new NotImplementedException();
+            return true;
         }
 
-        public void Do(Control.IController engine)
+        public IAction Do(Control.IController engine)
         {
-            throw new NotImplementedException();
+            return engine.Step(fields);
         }
 
         //
         private int fields;
+        private string message;
     }
 }

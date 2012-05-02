@@ -7,20 +7,21 @@ namespace GazdalkodjOkosan.Model.Actions
 {
     class Fee : IAction
     {
-        public Fee(int amount) {
+        public Fee(int amount, string message = "", FCond cond = null) {
             this.amount = amount;
+            this.message = message;
+            this.cond = cond;
         }
 
         #region interface
         public string Message
         {
-            get { return message; }
-            set { message = value + "Kapsz " + amount + ".- Ft-ot!"; }
+            get { return message + "Kapsz " + amount + ".- Ft-ot!"; }
         }
 
         public bool Cond(Control.IController engine)
         {
-            if (_cond != null) return _cond.Invoke(engine);
+            if (cond != null) return cond.Invoke(engine);
             return true;
         }
 
@@ -39,7 +40,6 @@ namespace GazdalkodjOkosan.Model.Actions
         private int amount;
         private string message;
 
-        Cond _cond;
-        Do _do;
+        FCond cond;
     }
 }

@@ -5,24 +5,30 @@ using System.Text;
 
 namespace GazdalkodjOkosan.Model.Actions
 {
-    class SavingBookInterest
+    class SavingBookInterest : IAction
     {
+        public SavingBookInterest(int percent, string message = "") {
+            this.percent = percent;
+            this.message = message;
+        }
+
         public string Message
         {
-            get { throw new NotImplementedException(); }
+            get { return message + "Betéteid után " + percent + "% kamatot kapsz!"; }
         }
 
         public bool Cond(Control.IController engine)
         {
-            throw new NotImplementedException();
+            return true;
         }
 
-        public void Do(Control.IController engine)
+        public IAction Do(Control.IController engine)
         {
-            throw new NotImplementedException();
+            return new Fee((int)((double)engine.CurrentPlayer.SavingsBook * (double)percent / 100.0)).Do(engine);
         }
 
         //
-        private int precent;
+        private int percent;
+        private string message;
     }
 }
