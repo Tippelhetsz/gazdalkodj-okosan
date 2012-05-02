@@ -39,5 +39,10 @@ namespace GazdalkodjOkosan.Control
         {
             get { throw new NotImplementedException(); }
         }
+
+        Model.Actions.IAction IController.Roll()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
