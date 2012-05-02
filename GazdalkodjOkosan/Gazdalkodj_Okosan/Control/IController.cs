@@ -3,9 +3,9 @@ using GazdalkodjOkosan.Model.Game;
 
 namespace GazdalkodjOkosan.Control
 {
-    interface IController
+    public interface IController
     {
-        int Roll();
+        IAction Roll();
         IAction Step(int fields);
         IAction DoAction(IAction action);
         void NextPlayer();
