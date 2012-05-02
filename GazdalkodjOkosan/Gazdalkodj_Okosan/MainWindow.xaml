@@ -21,6 +21,7 @@
             </Grid>
         </Grid>
         <Grid Name="ConnectionGrid" Visibility="Hidden">
+            <Button Content="Start"  Margin="22,10,0,0" Width="206"  Height="50" Click="Button_Click" />
             <Grid Name="ConnectGrid1" Margin="93,298,0,0">
                 <Rectangle Height="99" HorizontalAlignment="Left"  Name="P1Rect" Stroke="Black" VerticalAlignment="Top" Width="206" Fill="Cornsilk" />
                 <TextBlock Name="P1StatusText" FontSize="14" Foreground="Red" FontFamily="ChessmasterX" Margin="15,10,0,0" TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Top"/>
