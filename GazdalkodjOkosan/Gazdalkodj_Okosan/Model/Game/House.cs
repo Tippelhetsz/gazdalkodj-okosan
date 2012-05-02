@@ -5,15 +5,33 @@ using System.Text;
 
 namespace GazdalkodjOkosan.Model.Game
 {
-    class House
+    public class House
     {
-        private int price;
-        private int loanPrice;
-        private List<PieceOfFurniture> furniture;
+        public House(int price, int loan) {
+            this.price = price;
+            this.loanPrice = loan;
+            furniture = new List<PieceOfFurniture>();
+        }
+
+        public void AddFurniture(PieceOfFurniture piece) {
+            this.furniture.Add(piece);
+        }
+
+        public void AddFurniture(ICollection<PieceOfFurniture> furniture)
+        {
+            this.furniture.AddRange(furniture);
+        }
+
+        public int Price { get { return price; } }
+        public int Loan { get { return loanPrice; } }
 
         public bool IsComplete()
         {
             return false;
         }
+
+        private int price;
+        private int loanPrice;
+        private List<PieceOfFurniture> furniture;
     }
 }

@@ -7,7 +7,7 @@ namespace GazdalkodjOkosan.Model.Actions
 {
     class Fine : IAction
     {
-        public Fine(int amount, string message, Cond cond = null) {
+        public Fine(int amount, string message, FCond cond = null) {
             this.amount = amount;
             this.message = message;
             this.cond = cond;
@@ -37,6 +37,6 @@ namespace GazdalkodjOkosan.Model.Actions
         //
         private int amount;
         private string message;
-        private Cond cond;
+        private FCond cond;
     }
 }

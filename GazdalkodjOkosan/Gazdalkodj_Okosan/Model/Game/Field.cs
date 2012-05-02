@@ -6,7 +6,7 @@ using GazdalkodjOkosan.Model.Actions;
 
 namespace GazdalkodjOkosan.Model.Game
 {
-    class Field
+    public class Field
     {
         public Field(int id, IAction action)
         {
@@ -15,6 +15,10 @@ namespace GazdalkodjOkosan.Model.Game
         public IAction Action
         {
             get { return action; }
+        }
+        public int Id
+        {
+            get { return FieldID; }
         }
 
         private int FieldID;

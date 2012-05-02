@@ -5,5 +5,5 @@ using System.Text;
 
 namespace GazdalkodjOkosan.Model.Game
 {
-    public enum EInsurance { Cseb, Home, HomeAndCseb };
+    public enum EInsurance { Nothing, Cseb, Home, HomeAndCseb };
 }

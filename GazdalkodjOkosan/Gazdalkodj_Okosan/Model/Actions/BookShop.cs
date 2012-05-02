@@ -5,22 +5,35 @@ using System.Text;
 
 namespace GazdalkodjOkosan.Model.Actions
 {
-    class BookShop
+    class BookShop : IAction
     {
+        public BookShop(int price, string message = "") {
+            this.price = price;
+            this.message = message;
+        }
 
         public string Message
         {
-            get { throw new NotImplementedException(); }
+            get { return message + (message == "" ? "" : "\n") + price + ".-Ft"; }
         }
 
         public bool Cond(Control.IController engine)
         {
-            throw new NotImplementedException();
+            return engine.CurrentPlayer.Money >= price;
         }
 
-        public void Do(Control.IController engine)
+        public IAction Do(Control.IController engine)
         {
-            throw new NotImplementedException();
+            if (Cond(engine))
+            {
+                engine.CurrentPlayer.BookToken += price;
+            }
+
+            return new Nothing();
         }
+
+        //
+        private string message;
+        private int price;
     }
 }

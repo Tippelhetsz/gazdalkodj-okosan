@@ -6,24 +6,33 @@ using GazdalkodjOkosan.Model.Game;
 
 namespace GazdalkodjOkosan.Model.Actions
 {
-    class GoTo
+    class GoTo : IAction
     {
+        public GoTo(int field, string message = "") {
+            this.field = field;
+            this.message = message;
+        }
+
         public string Message
         {
-            get { throw new NotImplementedException(); }
+            get {
+                return message + "Lépj a(z) " + field + "-s mezőre!";
+            }
         }
 
         public bool Cond(Control.IController engine)
         {
-            throw new NotImplementedException();
+            return true;
         }
 
-        public void Do(Control.IController engine)
+        public IAction Do(Control.IController engine)
         {
-            throw new NotImplementedException();
+            int step = field - engine.CurrentPlayer.currentField < 0 ? (engine.Table.Fields.Length - engine.CurrentPlayer.currentField + field) : (field - engine.CurrentPlayer.currentField);
+            return engine.Step(step);
         }
 
         //
-        private Field field;
+        private int field;
+        private string message;
     }
 }

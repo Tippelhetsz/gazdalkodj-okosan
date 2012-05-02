@@ -6,7 +6,7 @@ using GazdalkodjOkosan.Model.Actions;
 
 namespace GazdalkodjOkosan.Model.Game
 {
-    class LuckyCard
+    public class LuckyCard
     {
         public LuckyCard(IAction action)
         {

@@ -14,12 +14,10 @@ namespace GazdalkodjOkosan.Model.Actions
             this.enter = enter;
             if (this.enter)
             {
-                fee = new Fee(enterFee);
-                fee.Message = "Beléptél a START mezőre.";
+                fee = new Fee(enterFee, "Beléptél a START mezőre.");
             }
             else {
-                fee = new Fee(moveThroughFee);
-                fee.Message = "Áthaladtál a START mezőn.";
+                fee = new Fee(moveThroughFee, "Áthaladtál a START mezőn.");
             }
         }
 

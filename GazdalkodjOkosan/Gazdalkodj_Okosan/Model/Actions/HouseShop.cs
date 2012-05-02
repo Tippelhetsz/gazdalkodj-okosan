@@ -6,24 +6,41 @@ using GazdalkodjOkosan.Model.Game;
 
 namespace GazdalkodjOkosan.Model.Actions
 {
-    class HouseShop
+    class HouseShop : IAction
     {
+        public HouseShop(int price, int loan, string message = "") {
+            this.message = message;
+            this.price = price;
+            this.loan = loan;
+        }
+
         public string Message
         {
-            get { throw new NotImplementedException(); }
+            get { return message + "Fizess be " + price + ".- Ft-ot. A hátralevő " + loan + ".- Ft-ot körönként 2000.- Ft-os részletekben törlesztheted."; }
         }
 
         public bool Cond(Control.IController engine)
         {
-            throw new NotImplementedException();
+            return engine.CurrentPlayer.Money >= price;
         }
 
-        public void Do(Control.IController engine)
+        public IAction Do(Control.IController engine)
         {
-            throw new NotImplementedException();
+            if (Cond(engine))
+            {
+                House house = new House(price, loan);
+                engine.CurrentPlayer.Home = house;
+                return new Nothing();
+            }
+            else { 
+                return new Nothing();
+            }
         }
 
         //
         private House house;
+        private string message;
+        private int price;
+        private int loan;
     }
 }

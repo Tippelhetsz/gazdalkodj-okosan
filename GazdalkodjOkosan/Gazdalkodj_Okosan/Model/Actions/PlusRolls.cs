@@ -5,24 +5,33 @@ using System.Text;
 
 namespace GazdalkodjOkosan.Model.Actions
 {
-    class PlusRolls
+    class PlusRolls : IAction
     {
+        string[] numbers { get { return new string[] { "", "egyszer", "kétszer", "háromszor" }; } }
+
+        public PlusRolls(int rolls, string message = null) {
+            this.rolls = rolls;
+            this.message = message;
+        }
+
         public string Message
         {
-            get { throw new NotImplementedException(); }
+            get { return message + "Dobhatsz még " + numbers[rolls] + "!"; }
         }
 
         public bool Cond(Control.IController engine)
         {
-            throw new NotImplementedException();
+            return true;
         }
 
-        public void Do(Control.IController engine)
+        public IAction Do(Control.IController engine)
         {
-            throw new NotImplementedException();
+            engine.CurrentPlayer.RollsLeft += rolls;
+            return new Nothing();
         }
 
         //
         private int rolls;
+        private string message;
     }
 }
