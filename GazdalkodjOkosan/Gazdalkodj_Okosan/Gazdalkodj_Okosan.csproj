@@ -55,6 +55,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Model\Network\NetworkManager.cs" />
     <Compile Include="NameInputDialog.xaml.cs">
       <DependentUpon>NameInputDialog.xaml</DependentUpon>
     </Compile>
