@@ -102,10 +102,20 @@ namespace Gazdalkodj_Okosan
         {
             for (int i = 0; i < ConnectionGrid.Children.Count; ++i)
             {
-                ((Grid)ConnectionGrid.Children[i]).Visibility = Visibility.Hidden;
+                try
+                {
+                    ((Grid)ConnectionGrid.Children[i]).Visibility = Visibility.Hidden;
+                }
+                catch { }
             }
-            ((Grid)ConnectionGrid.Children[0]).Visibility = Visibility.Visible;
+            ((Grid)ConnectionGrid.Children[1]).Visibility = Visibility.Visible;
             P1StatusText.Inlines.Add(new Run("1. játékos: " + PlayerName));
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            BoardWindow board = new BoardWindow();
+            board.Show();
         }
     }
 }
