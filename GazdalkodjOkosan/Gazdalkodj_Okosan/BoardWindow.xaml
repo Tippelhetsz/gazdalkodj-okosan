@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="BoardWindow" Height="768" Width="1024">
     <Window.Background>
-        <ImageBrush ImageSource="/Gazdalkodj_Okosan;component/img/Board.png" Stretch="None" TileMode="None" />
+        <ImageBrush ImageSource="img/Board.png"  Stretch="None" TileMode="None" />
     </Window.Background>
     <Grid>
         <Canvas>
