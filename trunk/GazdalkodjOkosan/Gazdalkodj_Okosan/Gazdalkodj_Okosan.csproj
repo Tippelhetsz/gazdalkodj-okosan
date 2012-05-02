@@ -82,9 +82,7 @@
   <ItemGroup>
     <Compile Include="Model\Actions\Ban.cs" />
     <Compile Include="Model\Actions\BookShop.cs" />
-    <Compile Include="Model\Actions\BuyBook.cs" />
     <Compile Include="Model\Actions\BuyFurniture.cs" />
-    <Compile Include="Model\Actions\BuyHouse.cs" />
     <Compile Include="Model\Actions\BuyInsurance.cs" />
     <Compile Include="Model\Actions\BuySavingBook.cs" />
     <Compile Include="Model\Actions\DrawLuckyCard.cs" />
