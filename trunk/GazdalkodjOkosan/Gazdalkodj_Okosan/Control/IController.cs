@@ -5,10 +5,9 @@ namespace GazdalkodjOkosan.Control
 {
     public interface IController
     {
-        IAction Roll();
         IAction Step(int fields);
         IAction DoAction(IAction action);
-        void NextPlayer();
+        void NextPlayer(int id);
         Player CurrentPlayer { get; }
         Table Table { get; }
     }
