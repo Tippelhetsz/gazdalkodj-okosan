@@ -58,11 +58,12 @@ namespace GazdalkodjOkosan.Model.Game
         {
             return false;
         }
+        public string UserName;
+        public int CurrentField { get { return currentField; } }
 
         private int UserId;
-        private string UserName;
         private List<PieceOfFurniture> furniture;
-        public int currentField;
+        private int currentField;
         private House home;
         private int bookToken;
     }
