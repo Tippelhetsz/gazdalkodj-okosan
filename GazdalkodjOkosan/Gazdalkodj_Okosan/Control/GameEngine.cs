@@ -64,7 +64,7 @@ namespace GazdalkodjOkosan.Control
         /// <summary>
         /// A következő játékosra lép
         /// </summary>
-        public void NextPlayer()
+        public void NextPlayer(int id = -1)
         {
             if (currentPlayer < 0)
             {
