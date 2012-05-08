@@ -12,6 +12,20 @@ namespace GazdalkodjOkosan.Control
         #region Implement interface
 
         /// <summary>
+        /// Létrehozza a játék logikáját.
+        /// </summary>
+        /// <param name="players">Játékosok tömbje</param>
+        public void CreateGame(Player[] players)
+        {
+            this.players = players;
+            this.table = new Table();
+            this.dice = new Dice();
+            currentPlayer = -1;
+
+            NextPlayer();
+        }
+
+        /// <summary>
         /// Dobás a kockával.
         /// </summary>
         /// <returns>
@@ -21,6 +35,7 @@ namespace GazdalkodjOkosan.Control
         public IAction Roll()
         {
             int roll = dice.Roll();
+
             CurrentPlayer.RollsLeft--;
 
             if (players[currentPlayer].BanUntilRoll.Contains(roll))
@@ -30,7 +45,14 @@ namespace GazdalkodjOkosan.Control
                 return new Go(roll);
             }
             else {
-                return new Nothing();
+                string message = "Csak ";
+                for (int i = 0; i < players[currentPlayer].BanUntilRoll.Length - 1; i++)
+                {
+                    message += players[currentPlayer].BanUntilRoll[i] + "-s, ";
+                }
+                message += "és " + players[currentPlayer].BanUntilRoll[players[currentPlayer].BanUntilRoll.Length - 1] + "-s dobással léphetsz tovább!";
+
+                return new Nothing(message);
             }
         }
 
@@ -80,8 +102,13 @@ namespace GazdalkodjOkosan.Control
                 }
             }
 
-            if (CurrentPlayer.RollsLeft <= 0)
+            if (CurrentPlayer.BanUntilRoll.Length == 0) { 
+                // A játékos már kiesett, ugorjuk át
+                NextPlayer();
+            }
+            else if (CurrentPlayer.RollsLeft <= 0)
             {
+                // A játékos nem léphet, mert kimarad valahány körből, ugorjuk át (esetleg küldjünk neki egy üzenetet)
                 NextPlayer();
             }
             else
@@ -105,15 +132,6 @@ namespace GazdalkodjOkosan.Control
         public Player Winner()
         {
             return null;
-        }
-
-        public void CreateGame(Player[] players) {
-            this.players = players;
-            this.table = new Table();
-            this.dice = new Dice();
-            currentPlayer = -1;
-
-            NextPlayer();
         }
 
         private Player[] players;

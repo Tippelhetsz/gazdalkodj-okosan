@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using GazdalkodjOkosan.Model.Actions;
+using GazdalkodjOkosan.Model.Game;
 
 namespace GazdalkodjOkosan.Control
 {
@@ -22,12 +24,17 @@ namespace GazdalkodjOkosan.Control
             throw new NotImplementedException();
         }
 
-        public Model.Actions.IAction Step(int fields)
+        public IAction Roll()
         {
             throw new NotImplementedException();
         }
 
-        public Model.Actions.IAction DoAction(Model.Actions.IAction action)
+        public IAction Step(int fields)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IAction DoAction(IAction action)
         {
             throw new NotImplementedException();
         }
@@ -37,12 +44,12 @@ namespace GazdalkodjOkosan.Control
             throw new NotImplementedException();
         }
 
-        public Model.Game.Player CurrentPlayer
+        public Player CurrentPlayer
         {
             get { throw new NotImplementedException(); }
         }
 
-        public Model.Game.Table Table
+        public Table Table
         {
             get { throw new NotImplementedException(); }
         }
