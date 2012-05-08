@@ -19,6 +19,12 @@ namespace GazdalkodjOkosan.Control
         void NextPlayer(int id = -1);
 
         /// <summary>
+        /// Dobás a kockával
+        /// </summary>
+        /// <returns>Visszaadja a dobás után elvégezhető akciót</returns>
+        IAction Roll();
+
+        /// <summary>
         /// Elvégzi a megadott paraméter szerinti lépést.
         /// </summary>
         /// <param name="fields">Dobás eredménye (lépések száma)</param>

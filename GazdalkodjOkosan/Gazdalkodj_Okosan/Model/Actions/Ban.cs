@@ -19,7 +19,7 @@ namespace GazdalkodjOkosan.Model.Actions
                 {
                     this.message += untilRoll[i] + "-s, ";
                 }
-                this.message += untilRoll[untilRoll.Length - 1];
+                this.message += "és " + untilRoll[untilRoll.Length - 1] + "-s dobással léphetsz tovább!";
 
                 this.untilRoll = untilRoll;
                 this.rounds = 0;
