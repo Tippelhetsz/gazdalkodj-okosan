@@ -129,11 +129,16 @@ namespace GazdalkodjOkosan.Control
         public Player CurrentPlayer { get { return players[currentPlayer]; } }
         #endregion
 
+        /// <summary>
+        /// Megadja a győztes játékost.
+        /// </summary>
+        /// <returns></returns>
         public Player Winner()
         {
             return null;
         }
 
+        //
         private Player[] players;
         private int currentPlayer;
         private Table table;

@@ -12,46 +12,142 @@ namespace GazdalkodjOkosan.Control
     /// </summary>
     class ClientController : IController
     {
-        public void CreateGame(Model.Game.Player[] players)
+        #region Implement interface
+
+        /// <summary>
+        /// Létrehozza a játék logikáját.
+        /// </summary>
+        /// <param name="players">Játékosok tömbje</param>
+        public void CreateGame(Player[] players)
         {
-            // todo: játék inicializálása kliens oldalon
-            throw new NotImplementedException();
+            this.players = players;
+            this.table = new Table();
+            this.dice = new Dice();
+            currentPlayer = -1;
         }
 
-        public void NextPlayer(int id = -1)
-        {
-            // todo: következő játékos emghatározása
-            throw new NotImplementedException();
-        }
-
+        /// <summary>
+        /// Dobás a kockával.
+        /// </summary>
+        /// <returns>
+        /// Egy Go akciót ad vissza. Tehát a következő lehetőség, hogy lépjen annyit, amennyit dobott.
+        /// Ha csak bizonyos dobásokkal léphet tovább a játékos, akkor Nothing akciót ad vissza.
+        /// </returns>
         public IAction Roll()
         {
-            throw new NotImplementedException();
+            int roll = dice.Roll();
+
+            CurrentPlayer.RollsLeft--;
+
+            if (players[currentPlayer].BanUntilRoll.Contains(roll))
+            {
+                players[currentPlayer].BanUntilRoll = new int[] { 1, 2, 3, 4, 5, 6 };
+
+                return new Go(roll);
+            }
+            else
+            {
+                string message = "Csak ";
+                for (int i = 0; i < players[currentPlayer].BanUntilRoll.Length - 1; i++)
+                {
+                    message += players[currentPlayer].BanUntilRoll[i] + "-s, ";
+                }
+                message += "és " + players[currentPlayer].BanUntilRoll[players[currentPlayer].BanUntilRoll.Length - 1] + "-s dobással léphetsz tovább!";
+
+                return new Nothing(message);
+            }
         }
 
+        /// <summary>
+        /// Az aktuális játékos lépését végzi el.
+        /// </summary>
+        /// <param name="fields">
+        /// Ennyit lép a játékos
+        /// </param>
+        /// <returns>A célmező akcióját adja vissza</returns>
         public IAction Step(int fields)
         {
-            throw new NotImplementedException();
+            if (CurrentPlayer.currentField + fields > Table.Fields.Length)
+            {
+                new StartField(false).Do(this);
+                // todo: áthaladás a start menün, valamit jelezni a felhasználónak
+            }
+
+            return new Go(fields).Do(this);
         }
 
+        /// <summary>
+        /// Egy akciót hajt végre.
+        /// </summary>
+        /// <param name="action">A végrehajtandó akció</param>
+        /// <returns>Az akció végrehajtásával előálló újabb akció</returns>
         public IAction DoAction(IAction action)
         {
-            throw new NotImplementedException();
+            return action.Do(this);
         }
 
-        public void NextPlayer()
+        /// <summary>
+        /// A következő játékosra lép
+        /// </summary>
+        public void NextPlayer(int id = -1)
         {
-            throw new NotImplementedException();
+            if (id < 0)
+            {
+                if (currentPlayer < 0)
+                {
+                    Random rand = new Random();
+                    currentPlayer = rand.Next(0, players.Length);
+                    CurrentPlayer.RollsLeft++;
+                }
+                else
+                {
+                    if (CurrentPlayer.RollsLeft <= 0)
+                    {
+                        currentPlayer = (currentPlayer + 1) % players.Length;
+                        CurrentPlayer.RollsLeft++;
+                    }
+                }
+
+                if (CurrentPlayer.BanUntilRoll.Length == 0)
+                {
+                    // A játékos már kiesett, ugorjuk át
+                    NextPlayer();
+                }
+                else if (CurrentPlayer.RollsLeft <= 0)
+                {
+                    // A játékos nem léphet, mert kimarad valahány körből, ugorjuk át (esetleg küldjünk neki egy üzenetet)
+                    NextPlayer();
+                }
+                else
+                {
+                    // todo: üzenni, mindenkinek, hogy melyik játékos jön
+                }
+            }
+            else {
+                currentPlayer = id;
+
+                // todo: üzenni, mindenkinek, hogy melyik játékos jön
+            }
         }
 
-        public Player CurrentPlayer
+        public Table Table { get { return table; } }
+
+        public Player CurrentPlayer { get { return players[currentPlayer]; } }
+        #endregion
+
+        /// <summary>
+        /// Megadja a győztes játékost.
+        /// </summary>
+        /// <returns></returns>
+        public Player Winner()
         {
-            get { throw new NotImplementedException(); }
+            return null;
         }
 
-        public Table Table
-        {
-            get { throw new NotImplementedException(); }
-        }
+        //
+        private Player[] players;
+        private int currentPlayer;
+        private Table table;
+        private Dice dice;
     }
 }
