@@ -27,7 +27,7 @@ namespace GazdalkodjOkosan.Model.Actions
 
         public IAction Do(Control.IController engine)
         {
-            int step = field - engine.CurrentPlayer.currentField < 0 ? (engine.Table.Fields.Length - engine.CurrentPlayer.currentField + field) : (field - engine.CurrentPlayer.currentField);
+            int step = field - engine.CurrentPlayer.CurrentField < 0 ? (engine.Table.Fields.Length - engine.CurrentPlayer.CurrentField + field) : (field - engine.CurrentPlayer.CurrentField);
             return engine.Step(step);
         }
 

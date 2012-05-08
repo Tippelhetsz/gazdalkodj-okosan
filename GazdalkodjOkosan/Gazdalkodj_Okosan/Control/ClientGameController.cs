@@ -12,6 +12,10 @@ namespace GazdalkodjOkosan.Control
     /// </summary>
     class ClientController : IController
     {
+        public ClientController(string username) {
+            this.username = username;
+        }
+
         #region Implement interface
 
         /// <summary>
@@ -24,6 +28,14 @@ namespace GazdalkodjOkosan.Control
             this.table = new Table();
             this.dice = new Dice();
             currentPlayer = -1;
+
+            for (int i = 0; i < players.Length; i++) {
+                if (players[i].UserName == username)
+                {
+                    MyID = i;
+                    break;
+                }
+            }
         }
 
         /// <summary>
@@ -67,7 +79,7 @@ namespace GazdalkodjOkosan.Control
         /// <returns>A célmező akcióját adja vissza</returns>
         public IAction Step(int fields)
         {
-            if (CurrentPlayer.currentField + fields > Table.Fields.Length)
+            if (CurrentPlayer.CurrentField + fields > Table.Fields.Length)
             {
                 new StartField(false).Do(this);
                 // todo: áthaladás a start menün, valamit jelezni a felhasználónak
@@ -149,5 +161,8 @@ namespace GazdalkodjOkosan.Control
         private int currentPlayer;
         private Table table;
         private Dice dice;
+
+        private int MyID;
+        private string username;
     }
 }

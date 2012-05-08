@@ -65,7 +65,7 @@ namespace GazdalkodjOkosan.Control
         /// <returns>A célmező akcióját adja vissza</returns>
         public IAction Step(int fields)
         {
-            if (CurrentPlayer.currentField + fields > Table.Fields.Length) {
+            if (CurrentPlayer.CurrentField + fields > Table.Fields.Length) {
                 new StartField(false).Do(this);
                 // todo: áthaladás a start menün, valamit jelezni a felhasználónak
             }
@@ -88,38 +88,43 @@ namespace GazdalkodjOkosan.Control
         /// </summary>
         public void NextPlayer(int id = -1)
         {
-            if (currentPlayer < 0)
+            if (id < 0)
             {
-                Random rand = new Random();
-                currentPlayer = rand.Next(0, players.Length);
-                CurrentPlayer.RollsLeft++;
-            }
-            else {
-                if (CurrentPlayer.RollsLeft <= 0)
+                if (currentPlayer < 0)
                 {
-                    currentPlayer = (currentPlayer + 1) % players.Length;
+                    Random rand = new Random();
+                    currentPlayer = rand.Next(0, players.Length);
                     CurrentPlayer.RollsLeft++;
-                }
-            }
-
-            if (CurrentPlayer.BanUntilRoll.Length == 0) { 
-                // A játékos már kiesett, ugorjuk át
-                NextPlayer();
-            }
-            else if (CurrentPlayer.RollsLeft <= 0)
-            {
-                // A játékos nem léphet, mert kimarad valahány körből, ugorjuk át (esetleg küldjünk neki egy üzenetet)
-                NextPlayer();
-            }
-            else
-            {
-                if (currentPlayer == 0)
-                {
-                    // todo: szerver oldali játékos jön, kiváltani valami yourTurn eseményt
                 }
                 else
                 {
-                    // todo: kliens oldali játékos jön, üzenni neki hálózaton, hogy ő jön
+                    if (CurrentPlayer.RollsLeft <= 0)
+                    {
+                        currentPlayer = (currentPlayer + 1) % players.Length;
+                        CurrentPlayer.RollsLeft++;
+                    }
+                }
+
+                if (CurrentPlayer.BanUntilRoll.Length == 0)
+                {
+                    // A játékos már kiesett, ugorjuk át
+                    NextPlayer();
+                }
+                else if (CurrentPlayer.RollsLeft <= 0)
+                {
+                    // A játékos nem léphet, mert kimarad valahány körből, ugorjuk át (esetleg küldjünk neki egy üzenetet)
+                    NextPlayer();
+                }
+                else
+                {
+                    if (currentPlayer == MyID)
+                    {
+                        // todo: szerver oldali játékos jön, kiváltani valami yourTurn eseményt
+                    }
+                    else
+                    {
+                        // todo: kliens oldali játékos jön, üzenni neki hálózaton, hogy ő jön
+                    }
                 }
             }
         }
@@ -143,5 +148,7 @@ namespace GazdalkodjOkosan.Control
         private int currentPlayer;
         private Table table;
         private Dice dice;
+
+        private int MyID = 0;
     }
 }
