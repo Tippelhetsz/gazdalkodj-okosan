@@ -74,8 +74,8 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Control\ClientController.cs" />
-    <Compile Include="Control\GameEngine.cs" />
+    <Compile Include="Control\ClientGameController.cs" />
+    <Compile Include="Control\ServerGameController.cs" />
     <Compile Include="Control\IController.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
