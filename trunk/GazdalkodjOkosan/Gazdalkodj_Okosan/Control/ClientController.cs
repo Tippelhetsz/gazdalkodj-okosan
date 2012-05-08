@@ -10,8 +10,15 @@ namespace GazdalkodjOkosan.Control
     /// </summary>
     class ClientController : IController
     {
-        public int Roll()
+        public void CreateGame(Model.Game.Player[] players)
         {
+            // todo: játék inicializálása kliens oldalon
+            throw new NotImplementedException();
+        }
+
+        public void NextPlayer(int id = -1)
+        {
+            // todo: következő játékos emghatározása
             throw new NotImplementedException();
         }
 
@@ -38,11 +45,6 @@ namespace GazdalkodjOkosan.Control
         public Model.Game.Table Table
         {
             get { throw new NotImplementedException(); }
-        }
-
-        Model.Actions.IAction IController.Roll()
-        {
-            throw new NotImplementedException();
         }
     }
 }
