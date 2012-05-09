@@ -1,0 +1,158 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{FAB6ECCF-E2AB-4FC9-94EA-3368330BBC19}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Gazdalkodj_Okosan</RootNamespace>
+    <AssemblyName>Gazdalkodj_Okosan</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="BoardWindow.xaml.cs">
+      <DependentUpon>BoardWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Network\NetworkManager.cs" />
+    <Compile Include="NameInputDialog.xaml.cs">
+      <DependentUpon>NameInputDialog.xaml</DependentUpon>
+    </Compile>
+    <Page Include="BoardWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Control\ClientGameController.cs" />
+    <Compile Include="Control\ServerGameController.cs" />
+    <Compile Include="Control\IController.cs" />
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Include="NameInputDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Model\Actions\Ban.cs" />
+    <Compile Include="Model\Actions\BookShop.cs" />
+    <Compile Include="Model\Actions\BuyFurniture.cs" />
+    <Compile Include="Model\Actions\BuyInsurance.cs" />
+    <Compile Include="Model\Actions\BuySavingBook.cs" />
+    <Compile Include="Model\Actions\DrawLuckyCard.cs" />
+    <Compile Include="Model\Actions\Fee.cs" />
+    <Compile Include="Model\Actions\Fine.cs" />
+    <Compile Include="Model\Actions\FurnitureShop.cs" />
+    <Compile Include="Model\Actions\Go.cs" />
+    <Compile Include="Model\Actions\GoTo.cs" />
+    <Compile Include="Model\Actions\HouseFire.cs" />
+    <Compile Include="Model\Actions\HouseShop.cs" />
+    <Compile Include="Model\Actions\IAction.cs" />
+    <Compile Include="Model\Actions\InsuranceShop.cs" />
+    <Compile Include="Model\Actions\Nothing.cs" />
+    <Compile Include="Model\Actions\PlusRolls.cs" />
+    <Compile Include="Model\Actions\SavingBookInterest.cs" />
+    <Compile Include="Model\Actions\StartField.cs" />
+    <Compile Include="Model\Actions\WinFurniture.cs" />
+    <Compile Include="Model\Game\Dice.cs" />
+    <Compile Include="Model\Game\EInsurance.cs" />
+    <Compile Include="Model\Game\Field.cs" />
+    <Compile Include="Model\Game\House.cs" />
+    <Compile Include="Model\Game\LuckyCard.cs" />
+    <Compile Include="Model\Game\PieceOfFurniture.cs" />
+    <Compile Include="Model\Game\Player.cs" />
+    <Compile Include="Model\Game\Table.cs" />
+    <Compile Include="Model\Network\GameClient.cs" />
+    <Compile Include="Model\Network\GameData.cs" />
+    <Compile Include="Model\Network\GameServer.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="img\main.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="img\Board.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
