@@ -1,0 +1,10 @@
+﻿<Window x:Class="Gazdalkodj_Okosan.NameInputDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Válasszon nevet!" Height="104" Width="364" ResizeMode="NoResize" Name="NameInputDialog1">
+    <Grid Height="67" Width="267">
+        <TextBox Height="23" HorizontalAlignment="Left" Margin="12,31,0,0" Name="textBox1" VerticalAlignment="Top" Width="131" />
+        <Label Content="Név:" Height="28" HorizontalAlignment="Left" Margin="12,0,0,0" Name="label1" VerticalAlignment="Top" />
+        <Button Content="OK" Height="23" HorizontalAlignment="Right" Margin="0,31,26,0" Name="button1" VerticalAlignment="Top" Width="75" Click="button1_Click" />
+    </Grid>
+</Window>
