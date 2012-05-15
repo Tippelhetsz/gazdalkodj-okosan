@@ -58,13 +58,24 @@
     <Compile Include="BoardWindow.xaml.cs">
       <DependentUpon>BoardWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="IPInputDialog.xaml.cs">
+      <DependentUpon>IPInputDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Model\GUI\PicturePanel.cs" />
     <Compile Include="Model\Network\NetworkManager.cs" />
     <Compile Include="NameInputDialog.xaml.cs">
       <DependentUpon>NameInputDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="PurchaseDialog.xaml.cs">
+      <DependentUpon>PurchaseDialog.xaml</DependentUpon>
+    </Compile>
     <Page Include="BoardWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="IPInputDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -82,6 +93,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="NameInputDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PurchaseDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -146,6 +161,115 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="img\Board.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="img\1 másolata.png" />
+    <Resource Include="img\1.png" />
+    <Resource Include="img\2.png" />
+    <Resource Include="img\3.png" />
+    <Resource Include="img\4.png" />
+    <Resource Include="img\5.png" />
+    <Resource Include="img\bike.png" />
+    <Resource Include="img\board1.png" />
+    <Resource Include="img\board1resize.png" />
+    <Resource Include="img\board2.png" />
+    <Resource Include="img\board2resize.png" />
+    <Resource Include="img\boarddrawn.png" />
+    <Resource Include="img\bolt.png" />
+    <Resource Include="img\bútor.png" />
+    <Resource Include="img\cigi.png" />
+    <Resource Include="img\csap.png" />
+    <Resource Include="img\cséb.png" />
+    <Resource Include="img\cséb1.png" />
+    <Resource Include="img\cucc.png" />
+    <Resource Include="img\edge00.png" />
+    <Resource Include="img\EmptyHouse.jpg" />
+    <Resource Include="img\figura.png" />
+    <Resource Include="img\firstpart.png" />
+    <Resource Include="img\firstpartsmall.png" />
+    <Resource Include="img\fridge.png" />
+    <Resource Include="img\GameBoard.png" />
+    <Resource Include="img\gyerek.png" />
+    <Resource Include="img\győz.png" />
+    <Resource Include="img\halfboard.png" />
+    <Resource Include="img\ibusz.png" />
+    <Resource Include="img\kitchen.png" />
+    <Resource Include="img\kuka.png" />
+    <Resource Include="img\kölcsön.png" />
+    <Resource Include="img\könyv.png" />
+    <Resource Include="img\lépcső.png" />
+    <Resource Include="img\moso.png" />
+    <Resource Include="img\museum.png" />
+    <Resource Include="img\piclocation.txt" />
+    <Resource Include="img\posta.png" />
+    <Resource Include="img\pptable.png" />
+    <Resource Include="img\radio.png" />
+    <Resource Include="img\rejt.png" />
+    <Resource Include="img\square0.png" />
+    <Resource Include="img\square1.png" />
+    <Resource Include="img\square10.png" />
+    <Resource Include="img\square11.png" />
+    <Resource Include="img\square12.png" />
+    <Resource Include="img\square13.png" />
+    <Resource Include="img\square14.png" />
+    <Resource Include="img\square15.png" />
+    <Resource Include="img\square16.png" />
+    <Resource Include="img\square17.png" />
+    <Resource Include="img\square18.png" />
+    <Resource Include="img\square19.png" />
+    <Resource Include="img\square2.png" />
+    <Resource Include="img\square20.png" />
+    <Resource Include="img\square21.png" />
+    <Resource Include="img\square22.png" />
+    <Resource Include="img\square23.png" />
+    <Resource Include="img\square24.png" />
+    <Resource Include="img\square25.png" />
+    <Resource Include="img\square26.png" />
+    <Resource Include="img\square27.png" />
+    <Resource Include="img\square28.png" />
+    <Resource Include="img\square29.png" />
+    <Resource Include="img\square3.png" />
+    <Resource Include="img\square30.png" />
+    <Resource Include="img\square31.png" />
+    <Resource Include="img\square32.png" />
+    <Resource Include="img\square33.png" />
+    <Resource Include="img\square34.png" />
+    <Resource Include="img\square35.png" />
+    <Resource Include="img\square36.png" />
+    <Resource Include="img\square37.png" />
+    <Resource Include="img\square38.png" />
+    <Resource Include="img\square39.png" />
+    <Resource Include="img\square4.png" />
+    <Resource Include="img\square5.png" />
+    <Resource Include="img\square6.png" />
+    <Resource Include="img\square7.png" />
+    <Resource Include="img\square8.png" />
+    <Resource Include="img\square9.png" />
+    <Resource Include="img\szalámi.png" />
+    <Resource Include="img\szerencse.png" />
+    <Resource Include="img\szinhaz.png" />
+    <Resource Include="img\szoba.png" />
+    <Resource Include="img\szobawithoutradio.png" />
+    <Resource Include="img\takarek.png" />
+    <Resource Include="img\takaszov.png" />
+    <Resource Include="img\torna.png" />
+    <Resource Include="img\tvset.png" />
+    <Resource Include="img\tévé.png" />
+    <Resource Include="img\vacuum.png" />
+    <Resource Include="img\vonat.png" />
+    <Resource Include="img\zuhany.png" />
+    <Resource Include="img\áru.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="img\MoneyBoard.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="img\redX.png" />
+    <Resource Include="img\StatusImg.png" />
+    <Resource Include="img\tick.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="img\tickcross.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

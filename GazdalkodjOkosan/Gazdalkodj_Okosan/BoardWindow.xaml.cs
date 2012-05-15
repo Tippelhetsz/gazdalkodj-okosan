@@ -1,20 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using System.Threading;
 using System.Windows.Threading;
 using System.Windows.Media.Animation;
-using System.IO;
-using Gazdalkodj_Okosan.Model.Game;
+using GazdalkodjOkosan.Model.Game;
 
 namespace Gazdalkodj_Okosan
 {
@@ -25,24 +18,43 @@ namespace Gazdalkodj_Okosan
     {
         private PlayerBoardStatus[] PlayerPieces;
 
-        private Storyboard PieceAnimationStory;
+        private ImageSource StatusTick;
 
         private DispatcherTimer AnimationTimer;
 
         private int Rolled, ToGo, CurrentPlayer, TotalPlayers;
 
-        public BoardWindow(int NumerOfPlayers = 4)
+        private Ellipse[] PlayerEllipses;
+
+        private Label[] StatusColumnLabels;
+
+        private bool squareopened = false;
+
+        public BoardWindow(int NumerOfPlayers = 5)
         {
             TotalPlayers = NumerOfPlayers;
             CurrentPlayer = 0;
             InitializeComponent();
+            PlayerEllipses = new Ellipse[6] { Player1Piece, Player2Piece, Player3Piece, Player4Piece, Player5Piece, Player6Piece };
+            StatusColumnLabels = new Label[TotalPlayers];
             InitializePieceList();
+            StatusTick = StatusImage.Source;
             AnimationTimer = new DispatcherTimer();
             AnimationTimer.Interval = TimeSpan.FromSeconds(1.5);
             AnimationTimer.Tick += new EventHandler(AnimationTimer_Tick);
             AddFurnitureToCanvas(EFurnitureType.Radio);
             AddFurnitureToCanvas(EFurnitureType.Kitchen);
             ImageOfHouse.Source = CanvasToRenderBitmap(HouseCanvas);
+           /* PurchaseDialog d = new PurchaseDialog(
+            new FurnitureShop(new PieceOfFurniture[] {
+                new PieceOfFurniture(6000, EFurnitureType.Television),
+                new PieceOfFurniture(2000, EFurnitureType.Radio),
+                new PieceOfFurniture(4000, EFurnitureType.Fridge),
+                new PieceOfFurniture(5000, EFurnitureType.Bathroom),
+                new PieceOfFurniture(1000, EFurnitureType.VacuumCleaner)}));
+            d.Show();*/
+            PlayerStatusColumn();
+            UpdateMoneyLabel(4500);
             
             //MovePiece();
         }
@@ -78,8 +90,10 @@ namespace Gazdalkodj_Okosan
                 SquareImage.Source = bit;
                 SquareImage.Height = 1;
                 SquareImage.Visibility = System.Windows.Visibility.Visible;
-                AnimateSquareOpen();
+                if (CurrentPlayer == 0)
+                    AnimateSquareOpen();
                 CurrentPlayer = (CurrentPlayer + 1) % TotalPlayers;
+                PlayerStatusColumn();
             }
         }
 
@@ -178,27 +192,27 @@ namespace Gazdalkodj_Okosan
                 switch (player)
                 {
                     case 0:
-                        Left = 840;
+                        Left = 850;
                         Top = 515;
                         break;
                     case 1:
-                        Left = 869;
+                        Left = 880;
                         Top = 470;
                         break;
                     case 2:
-                        Left = 868;
+                        Left = 880;
                         Top = 500;
                         break;
                     case 3:
-                        Left = 812;
+                        Left = 820;
                         Top = 470;
                         break;
                     case 4:
-                        Left = 812;
+                        Left = 820;
                         Top = 500;
                         break;
                     case 5:
-                        Left = 840;
+                        Left = 850;
                         Top = 540;
                         break;
                    
@@ -269,7 +283,6 @@ namespace Gazdalkodj_Okosan
             surface.Measure(size);
             surface.Arrange(new Rect(size));
 
-            // Create a render bitmap and push the surface to it
             RenderTargetBitmap renderBitmap =
               new RenderTargetBitmap(
                 (int)size.Width,
@@ -285,7 +298,7 @@ namespace Gazdalkodj_Okosan
 
         private void AnimateSquareOpen(bool Open = true)
         {
-
+            squareopened = Open;
             if (Open)
             {
                 if (IsLargeField(PlayerPieces[CurrentPlayer].CurrentField))
@@ -338,20 +351,6 @@ namespace Gazdalkodj_Okosan
 
         private void AnimateHouseOpen(bool Open = true)
         {
-            if (Open)
-            {
-                if (IsLargeField(PlayerPieces[CurrentPlayer].CurrentField))
-                {
-                    SquareImage.Width = 520;
-                    Canvas.SetLeft(SquareImage, 245);
-
-                }
-                else if (System.Convert.ToInt32(SquareImage.GetValue(Canvas.LeftProperty)) != 405)
-                {
-                    SquareImage.Width = 200;
-                    Canvas.SetLeft(SquareImage, 405);
-                }
-            }
 
             DoubleAnimation HorizontalAnimation = new DoubleAnimation();
             DoubleAnimation VerticalAnimation = new DoubleAnimation();
@@ -413,11 +412,79 @@ namespace Gazdalkodj_Okosan
             HouseTopStory.Begin();
             HouseWidthStory.Begin();
             HouseLeftStory.Begin();
+            
+        }
+        private void AnimateStatusOpen(bool Open = true)
+        {
+
+            DoubleAnimation HorizontalAnimation = new DoubleAnimation();
+            DoubleAnimation VerticalAnimation = new DoubleAnimation();
+            DoubleAnimation HeightAnimation = new DoubleAnimation();
+            DoubleAnimation WidthAnimation = new DoubleAnimation();
+
+            HorizontalAnimation.From = 750;
+            HorizontalAnimation.To = 100;
+
+            VerticalAnimation.From = 633;
+            VerticalAnimation.To = 100;
+
+            HeightAnimation.From = 40;
+            HeightAnimation.To = 577;
+
+            WidthAnimation.From = 80;
+            WidthAnimation.To = 750;
+
+            if (!Open)
+            {
+                HorizontalAnimation.To = 750;
+                HorizontalAnimation.From = 100;
+
+                VerticalAnimation.To = 633;
+                VerticalAnimation.From = 100;
+
+                HeightAnimation.To = 40;
+                HeightAnimation.From = 577;
+
+                WidthAnimation.To = 80;
+                WidthAnimation.From = 750;
+            }
+
+            HorizontalAnimation.Duration = VerticalAnimation.Duration = 
+             HeightAnimation.Duration = WidthAnimation.Duration =  TimeSpan.FromSeconds(0.5);
+
+            Storyboard HouseTopStory = new Storyboard();
+            Storyboard HouseLeftStory = new Storyboard();
+            Storyboard HouseWidthStory = new Storyboard();
+            Storyboard HouseHeightStory = new Storyboard();
+            HouseLeftStory.Children.Add(HorizontalAnimation);
+            HouseTopStory.Children.Add(VerticalAnimation);
+            HouseWidthStory.Children.Add(WidthAnimation);
+            HouseHeightStory.Children.Add(HeightAnimation);
+
+            Storyboard.SetTarget(HouseHeightStory, StatusImage);
+            Storyboard.SetTargetProperty(HouseHeightStory, new PropertyPath(Image.HeightProperty));
+
+            Storyboard.SetTarget(HouseTopStory, StatusImage);
+            Storyboard.SetTargetProperty(HouseTopStory, new PropertyPath(Canvas.TopProperty));
+
+            Storyboard.SetTarget(HouseWidthStory, StatusImage);
+            Storyboard.SetTargetProperty(HouseWidthStory, new PropertyPath(Image.WidthProperty));
+
+            Storyboard.SetTarget(HouseLeftStory, StatusImage);
+            Storyboard.SetTargetProperty(HouseLeftStory, new PropertyPath(Canvas.LeftProperty));
+
+            HouseHeightStory.Begin();
+            HouseTopStory.Begin();
+            HouseWidthStory.Begin();
+            HouseLeftStory.Begin();
+            StatusImage.Visibility = System.Windows.Visibility.Visible;
         }
 
 
         private void button1_Click(object sender, RoutedEventArgs e)
         {
+            if (squareopened)
+                AnimateSquareOpen(false);
             RollDice();
         }
 
@@ -435,12 +502,90 @@ namespace Gazdalkodj_Okosan
 
         }
 
+        private void SetupStatus()
+        {
+            string path = "img/tick.png";
+            path = System.IO.Path.GetFullPath(path);
+            BitmapImage bit = new BitmapImage(new Uri(path));
+           // Image im = new Image();
+           // im.Source = bit;
+            Ellipse[] ellipses = new Ellipse[6];
+            for (int i = 0; i < 4; ++i)
+            {
+                ellipses[i] = new Ellipse();
+                ellipses[i].Width = 20;
+                ellipses[i].Height = 20;
+                ellipses[i].Fill = PlayerEllipses[i].Fill;
+                StatusCanvas.Children.Add(ellipses[i]);
+                Canvas.SetLeft(ellipses[i], 186 + i * 95);
+                Canvas.SetTop(ellipses[i], 5);
+            }
+            for (int i = 0; i < 12; ++i)
+                for (int j = 0; j < 4; ++j)
+                {
+                    Image toAdd = new Image();
+                    toAdd.Source = bit;
+                    StatusCanvas.Children.Add(toAdd);
+                    Canvas.SetLeft(toAdd, 176 + j * 95);
+                    Canvas.SetTop(toAdd, 30 + i * 45);
+                }
+            StatusImage.Visibility = System.Windows.Visibility.Hidden;
+            StatusImage.Source = CanvasToRenderBitmap(StatusCanvas);
+        }
+
         private void AddFurnitureToCanvas(EFurnitureType FurType)
         {
             string path = "img/";
             int left = 0, top = 0;
+            GetFurnitureLocations(FurType,out left,out top,out path);
+            path = System.IO.Path.GetFullPath(path);
+            BitmapImage bit = new BitmapImage(new Uri(path));
+            Image im = new Image();
+            im.Source = bit;
+            HouseCanvas.Children.Add(im);
+            Canvas.SetLeft(im, left);
+            Canvas.SetTop(im, top);
+            
+        }
+
+        private void PlayerStatusColumn()
+        {
+            for (int i = 0; i < TotalPlayers; ++i)
+            {
+                Ellipse ellipses = new Ellipse();
+                bool AddLabels = StatusColumnLabels[i] == null;
+                if (AddLabels)
+                {
+                    StatusColumnLabels[i] = new Label();
+                    StatusColumnLabels[i].Content = (i + 1) + ". Játékos";
+                    StatusColumnLabels[i].FontFamily = new System.Windows.Media.FontFamily("ChessmasterX");
+                    StatusColumnLabels[i].FontSize = 14;
+
+                    ellipses.Height = 20;
+                    ellipses.Width = 20;
+                    ellipses.Fill = PlayerPieces[i].PlayerEllipse.Fill;
+
+                    outer.Children.Add(ellipses);
+                    outer.Children.Add(StatusColumnLabels[i]);
+                    Canvas.SetLeft(ellipses, 10);
+                    Canvas.SetTop(ellipses, 160 + i * 60);
+                    Canvas.SetLeft(StatusColumnLabels[i], 10);
+                    Canvas.SetTop(StatusColumnLabels[i], 130 + i * 60);
+                }
+  
+                if (CurrentPlayer == i)
+                    StatusColumnLabels[i].Foreground = Brushes.White;
+                else
+                    StatusColumnLabels[i].Foreground = Brushes.Gray;
+            }
+        }
+
+        private void GetFurnitureLocations(EFurnitureType FurType, out int left, out int top, out String path)
+        {
+            path = "img/";
+            left = 0; top = 0;
             switch (FurType)
-            { 
+            {
                 case EFurnitureType.Bathroom:
                     path += "moso.png";
                     left = 0;
@@ -487,14 +632,6 @@ namespace Gazdalkodj_Okosan
                     top = 286;
                     break;
             }
-            path = System.IO.Path.GetFullPath(path);
-            BitmapImage bit = new BitmapImage(new Uri(path));
-            Image im = new Image();
-            im.Source = bit;
-            HouseCanvas.Children.Add(im);
-            Canvas.SetLeft(im, left);
-            Canvas.SetTop(im, top);
-            
         }
 
         private void ImageOfHouse_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -504,7 +641,53 @@ namespace Gazdalkodj_Okosan
                 AnimateHouseOpen(false);
             }
             else
+            {
+                int zind = Canvas.GetZIndex(StatusImage);
+                Canvas.SetZIndex(ImageOfHouse, zind + 1);
                 AnimateHouseOpen();
+            }
+        }
+
+        private void UpdateMoneyLabel(int Amount)
+        {
+            String sum = Amount.ToString();
+            int lenght = sum.Length;
+            int points = (lenght - 1) / 3;
+            for (int i = 0; i < points; ++i)
+            {
+                sum = sum.Insert(lenght - (i + 1) * 3, ".");
+            }
+
+            MoneyLabel.Content = sum + ".- Ft";
+        }
+
+        private void StatusImage_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            if (StatusImage.Height == 40)
+            {
+                SetupStatus();
+                AnimateStatusOpen();
+            }
+            else
+            {
+                AnimateStatusOpen(false);
+                
+            }
+        }
+
+        private void StatusImage_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            if (StatusImage.Height == 40)
+                StatusImage.Source = StatusTick;
+        }
+
+        private void ImageOfHouse_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            if (ImageOfHouse.Height == 85)
+            {
+                int zind = Canvas.GetZIndex(StatusImage);
+                Canvas.SetZIndex(ImageOfHouse, zind - 1);
+            }
         }
 
     }
