@@ -24,7 +24,16 @@ namespace Gazdalkodj_Okosan
         {
             InitializeComponent();
             ParentWindow = parent;
+            textBox1.Focus();
+            textBox1.KeyDown += new KeyEventHandler(textBox1_KeyDown);
         }
+
+        void textBox1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+                button1_Click(null, null);
+        }
+            
 
         private void button1_Click(object sender, RoutedEventArgs e)
         {

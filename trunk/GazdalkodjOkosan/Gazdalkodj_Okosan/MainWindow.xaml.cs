@@ -1,22 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using Gazdalkodj_Okosan.Network;
-using System.Net.Sockets;
-using System.Net;
-using Gazdalkodj_Okosan.Model.Network;
 using GazdalkodjOkosan.Control;
-using System.Threading;
+using GazdalkodjOkosan.Model.Game;
 
 namespace Gazdalkodj_Okosan
 {
@@ -26,8 +15,9 @@ namespace Gazdalkodj_Okosan
     public partial class MainWindow : Window
     {
 
-        ClientController Controller;
+        IController Controller;
        // private delegate void ProcessMessageSendDelegate(MessageCode code);
+        Gazdalkodj_Okosan.Model.Network.NetworkManager manager;
         private String _PlayerName;
 
         public String PlayerName
@@ -39,12 +29,11 @@ namespace Gazdalkodj_Okosan
         public MainWindow()
         {
             InitializeComponent();
-            //Controller = new ClientController();
         }
 
         private void button1_Click(object sender, RoutedEventArgs e)
         {
-            //Controller.StartServer();
+            
             //Controller.BeginConnect(IPAddress.Parse("192.168.56.1"), "Startjátékos");
             //Thread.Sleep(1000);
             //Controller.NewGame();
@@ -59,16 +48,38 @@ namespace Gazdalkodj_Okosan
 
         private void NewGameText_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            //Controller.StartServer();
-            //Controller.BeginConnect(IPAddress.Parse("192.168.56.1"), "Startjátékos");
-            //Thread.Sleep(1000);
-            //Controller.NewGame();
+            StartNetwork();
+            InitServerEngine();
+            ShowNameInputDialog();
+            ShowConnectionGrid();
+        }
+
+        private void StartNetwork()
+        { 
+            //NetworkManager
+        }
+
+        private void InitServerEngine()
+        { 
+            //GameEngine
+        }
+
+        private void InitClientEngine()
+        { 
+            //ClientController
+        }
+
+        private void ShowConnectionGrid()
+        {
             MainButtonGrid.Visibility = System.Windows.Visibility.Hidden;
-            NameInputDialog dialog = new NameInputDialog(this);
-            dialog.ShowDialog();
             ConnectionGrid.Visibility = System.Windows.Visibility.Visible;
             UpdateConnectionInfo();
+        }
 
+        private void ShowMainMenu()
+        {
+            MainButtonGrid.Visibility = System.Windows.Visibility.Visible;
+            ConnectionGrid.Visibility = System.Windows.Visibility.Hidden;
         }
 
         private void NewGameEllipse_MouseDown(object sender, MouseButtonEventArgs e)
@@ -78,9 +89,28 @@ namespace Gazdalkodj_Okosan
 
         private void ConnectToText_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            //Controller.BeginConnect(IPAddress.Parse("192.168.56.1"), "Szandi");
-            //Thread.Sleep(1000);
-            //Controller.ConnectToGame();
+            ShowIpDialog();
+        }
+
+        private void ShowNameInputDialog()
+        {
+            NameInputDialog dialog = new NameInputDialog(this);
+            dialog.ShowDialog();
+        }
+
+        private void ShowIpDialog()
+        {
+            IPInputDialog dialog = new IPInputDialog();
+            dialog.Closed += new EventHandler(dialog_Closed);
+            dialog.Show();
+        }
+
+        void dialog_Closed(object sender, EventArgs e)
+        {
+            IPInputDialog dialog = (IPInputDialog)sender;
+            PlayerName = dialog.Name;
+           // manager.BeginConnect(dialog.IPAddress, dialog.Name);
+            ShowConnectionGrid();
         }
 
         private void ConnectToEllipse_MouseDown(object sender, MouseButtonEventArgs e)
@@ -114,8 +144,56 @@ namespace Gazdalkodj_Okosan
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            Player[] players = new Player[] { new Player(PlayerName), new Player("A másik") };
+
+
             BoardWindow board = new BoardWindow();
             board.Show();
+        }
+
+        private void NewGameEllipse_MouseEnter(object sender, MouseEventArgs e)
+        {
+            NewGameEllipse.Fill = NewGameEllipse.Stroke = Brushes.Purple;
+        }
+
+        private void ConnectToEllipse_MouseEnter(object sender, MouseEventArgs e)
+        {
+            ConnectToEllipse.Fill = ConnectToEllipse.Stroke = Brushes.Purple;
+        }
+
+        private void QuitEllipse_MouseEnter(object sender, MouseEventArgs e)
+        {
+            QuitEllipse.Fill = QuitEllipse.Stroke = Brushes.Purple;
+        }
+
+        private void NewGameEllipse_MouseLeave(object sender, MouseEventArgs e)
+        {
+            NewGameEllipse.Fill = NewGameEllipse.Stroke = new SolidColorBrush(Color.FromRgb(215, 0, 0));
+        }
+
+        private void ConnectToEllipse_MouseLeave(object sender, MouseEventArgs e)
+        {
+            ConnectToEllipse.Fill = ConnectToEllipse.Stroke = new SolidColorBrush(Color.FromRgb(215, 0, 0));
+        }
+
+        private void QuitEllipse_MouseLeave(object sender, MouseEventArgs e)
+        {
+            QuitEllipse.Fill = QuitEllipse.Stroke = new SolidColorBrush(Color.FromRgb(215, 0, 0));
+        }
+
+        private void NewGameText_MouseEnter(object sender, MouseEventArgs e)
+        {
+            NewGameEllipse_MouseEnter(sender, e);
+        }
+
+        private void ConnectToText_MouseEnter(object sender, MouseEventArgs e)
+        {
+            ConnectToEllipse_MouseEnter(sender, e);
+        }
+
+        private void QuitGameText_MouseEnter(object sender, MouseEventArgs e)
+        {
+            QuitEllipse_MouseEnter(sender, e);
         }
     }
 }
