@@ -30,7 +30,13 @@
             </Canvas>
             <Image Canvas.Left="585" Canvas.Top="615" Height="85" Name="ImageOfHouse" Stretch="Fill" Width="124" MouseLeftButtonDown="ImageOfHouse_MouseLeftButtonDown" Cursor="Hand" SizeChanged="ImageOfHouse_SizeChanged" />
             <Image Canvas.Left="750" Canvas.Top="633" Cursor="Hand" Height="40" Name="StatusImage" Stretch="Fill" Width="80" Source="/Gazdalkodj_Okosan;component/img/tickcross.png" MouseLeftButtonDown="StatusImage_MouseLeftButtonDown" SizeChanged="StatusImage_SizeChanged" />
-            
+            <Image Canvas.Left="330" Canvas.Top="244" Height="205" Name="LuckyCardImage" Stretch="Fill" Width="325" Source="/Gazdalkodj_Okosan;component/img/luckycard.png" Visibility="Hidden" SizeChanged="LuckyCardImage_SizeChanged" MouseDown="LuckyCardImage_MouseDown" Cursor="Hand" />
+            <Canvas Name="LuckyCardTextCanvas" Height="205" Width="325" Canvas.Top="1109" Canvas.Left="146">
+                <Image Canvas.Left="0" Canvas.Top="0" Height="205" Name="LuckyCardCanvasBackground" Stretch="Fill" Width="325" Source="/Gazdalkodj_Okosan;component/img/luckycard.png" Visibility="Visible" />
+                <Label Canvas.Left="6" Canvas.Top="81" Content="" Height="36" HorizontalContentAlignment="Center" Name="LuckyCardFirstLabel" FontFamily="ChessmasterX" FontSize="24" Width="313" />
+                <Label Canvas.Left="6" Canvas.Top="119" Content="" FontFamily="ChessmasterX" FontSize="24" Height="36" HorizontalContentAlignment="Center" Name="LuckyCardSecondLabel" Width="313" />
+                <Label Canvas.Left="6" Canvas.Top="157" Content="" FontFamily="ChessmasterX" FontSize="24" Height="36" HorizontalContentAlignment="Center" Name="LuckyCardThirdLabel" Width="313" />
+            </Canvas>
         </Canvas>
     </Grid>
 </Window>
