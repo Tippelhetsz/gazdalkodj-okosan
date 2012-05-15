@@ -28,7 +28,7 @@ namespace Gazdalkodj_Okosan
 
         private Label[] StatusColumnLabels;
 
-        private bool squareopened = false;
+        private bool squareopened = false, luckycardopened = false, houseinfoopened = false, tickcrossopened = false;
 
         public BoardWindow(int NumerOfPlayers = 5)
         {
@@ -55,6 +55,8 @@ namespace Gazdalkodj_Okosan
             d.Show();*/
             PlayerStatusColumn();
             UpdateMoneyLabel(4500);
+            SetupLuckyCard("Hello Szia Szevassz!");
+            AnimateLuckyCardOpen();
             
             //MovePiece();
         }
@@ -91,7 +93,12 @@ namespace Gazdalkodj_Okosan
                 SquareImage.Height = 1;
                 SquareImage.Visibility = System.Windows.Visibility.Visible;
                 if (CurrentPlayer == 0)
-                    AnimateSquareOpen();
+                {
+                    if (IsLuckyCardField(PlayerPieces[CurrentPlayer].CurrentField))
+                        AnimateLuckyCardOpen();
+                    else
+                        AnimateSquareOpen();
+                }
                 CurrentPlayer = (CurrentPlayer + 1) % TotalPlayers;
                 PlayerStatusColumn();
             }
@@ -106,6 +113,16 @@ namespace Gazdalkodj_Okosan
             AnimationTimer.Interval = TimeSpan.FromSeconds(1.5/Rolled);
             MovePiece();
             AnimationTimer.Start();
+        }
+
+        private bool IsLuckyCardField(int field)
+        {
+            return (field == 2 ||
+                field == 9 ||
+                field == 15 ||
+                field == 22 ||
+                field == 31 ||
+                field == 35);
         }
 
 
@@ -298,6 +315,11 @@ namespace Gazdalkodj_Okosan
 
         private void AnimateSquareOpen(bool Open = true)
         {
+            if (Open)
+            {
+                CloseOpenInfoWindows();
+            }
+
             squareopened = Open;
             if (Open)
             {
@@ -351,6 +373,12 @@ namespace Gazdalkodj_Okosan
 
         private void AnimateHouseOpen(bool Open = true)
         {
+            if (Open)
+            {
+                CloseOpenInfoWindows();
+            }
+
+            houseinfoopened = Open;
 
             DoubleAnimation HorizontalAnimation = new DoubleAnimation();
             DoubleAnimation VerticalAnimation = new DoubleAnimation();
@@ -416,6 +444,12 @@ namespace Gazdalkodj_Okosan
         }
         private void AnimateStatusOpen(bool Open = true)
         {
+            if (Open)
+            {
+                CloseOpenInfoWindows();
+            }
+
+            tickcrossopened = Open;
 
             DoubleAnimation HorizontalAnimation = new DoubleAnimation();
             DoubleAnimation VerticalAnimation = new DoubleAnimation();
@@ -480,13 +514,70 @@ namespace Gazdalkodj_Okosan
             StatusImage.Visibility = System.Windows.Visibility.Visible;
         }
 
+        private void AnimateLuckyCardOpen(bool Open = true)
+        {
+            if (Open)
+            {
+                CloseOpenInfoWindows();
+            }
+
+            luckycardopened = Open;
+
+            DoubleAnimation HorizontalAnimation = new DoubleAnimation();
+            DoubleAnimation WidthAnimation = new DoubleAnimation();
+
+            HorizontalAnimation.From = 492;
+            HorizontalAnimation.To = 330;
+
+            WidthAnimation.From = 1;
+            WidthAnimation.To = 325;
+
+            if (!Open)
+            {
+                HorizontalAnimation.To = 492;
+                HorizontalAnimation.From = 330;
+
+                WidthAnimation.To = 0;
+                WidthAnimation.From = 325;
+            }
+
+            HorizontalAnimation.Duration = WidthAnimation.Duration = TimeSpan.FromSeconds(0.5);
+
+            Storyboard HouseLeftStory = new Storyboard();
+            Storyboard HouseWidthStory = new Storyboard();
+            HouseLeftStory.Children.Add(HorizontalAnimation);
+            HouseWidthStory.Children.Add(WidthAnimation);
+
+            Storyboard.SetTarget(HouseWidthStory, LuckyCardImage);
+            Storyboard.SetTargetProperty(HouseWidthStory, new PropertyPath(Image.WidthProperty));
+
+            Storyboard.SetTarget(HouseLeftStory, LuckyCardImage);
+            Storyboard.SetTargetProperty(HouseLeftStory, new PropertyPath(Canvas.LeftProperty));
+
+            HouseWidthStory.Begin();
+            HouseLeftStory.Begin();
+            LuckyCardImage.Visibility = System.Windows.Visibility.Visible;
+        }
+
+
 
         private void button1_Click(object sender, RoutedEventArgs e)
         {
-            if (squareopened)
-                AnimateSquareOpen(false);
+            CloseOpenInfoWindows();
             RollDice();
         }
+
+        private void CloseOpenInfoWindows()
+        {
+            if (squareopened)
+                AnimateSquareOpen(false);
+            if (houseinfoopened)
+                AnimateHouseOpen(false);
+            if (tickcrossopened)
+                AnimateStatusOpen(false);
+            if (luckycardopened)
+                AnimateLuckyCardOpen(false);
+        }   
 
         private void SquareImage_MouseDown(object sender, MouseButtonEventArgs e)
         {
@@ -501,6 +592,27 @@ namespace Gazdalkodj_Okosan
             }
 
         }
+
+        private void SetupLuckyCard(string Message)
+        {
+            int numparts = (Message.Length - 1) / 20 + 1;
+            string[] parts = new string[3];
+            for (int i = 0; i < 3; ++i)
+            {
+                parts[i] = "";
+            }
+            for (int i = 0; i < numparts - 1; ++i)
+            {
+                parts[i] = Message.Substring(i * 20, 20);
+            }
+            parts[numparts - 1] = Message.Substring((numparts - 1) * 20);
+            LuckyCardFirstLabel.Content = parts[0];
+            LuckyCardSecondLabel.Content = parts[1];
+            LuckyCardThirdLabel.Content = parts[2];
+            LuckyCardImage.Source = CanvasToRenderBitmap(LuckyCardTextCanvas);
+            //LuckyCardImage.Visibility = System.Windows.Visibility.Visible;
+        }
+            
 
         private void SetupStatus()
         {
@@ -688,6 +800,19 @@ namespace Gazdalkodj_Okosan
                 int zind = Canvas.GetZIndex(StatusImage);
                 Canvas.SetZIndex(ImageOfHouse, zind - 1);
             }
+        }
+
+        private void LuckyCardImage_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            if (LuckyCardImage.Width == 0)
+            {
+                LuckyCardImage.Visibility = System.Windows.Visibility.Hidden;
+            }
+        }
+
+        private void LuckyCardImage_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            AnimateLuckyCardOpen(false);
         }
 
     }
