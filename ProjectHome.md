@@ -1,0 +1,1 @@
+A társasjáték megvalósítása Szoftverfolyamatok II órára.
